@@ -87,5 +87,20 @@ RSpec.describe IntegrationApi, type: :class do
       response = IntegrationApi.post(url, { foo: 'bar' })
       expect(JSON.parse(response.body)['data']).to eq('POST request')
     end
+
+
+    it 'should send a PUT request with authorization headers' do
+      url = 'https://www.myorigin.com/'
+      stub_request(:put, url).to_return(body: { data: 'PUT request' }.to_json)
+      response = IntegrationApi.put(url, { foo: 'bar' })
+      expect(JSON.parse(response.body)['data']).to eq('PUT request')
+    end
+
+    it 'should send a DELETE request with authorization headers' do
+      url = 'https://www.myorigin.com/'
+      stub_request(:delete, url).to_return(body: { data: 'DELETE request' }.to_json)
+      response = IntegrationApi.delete(url)
+      expect(JSON.parse(response.body)['data']).to eq('DELETE request')
+    end
   end
 end

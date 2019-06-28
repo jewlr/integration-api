@@ -25,10 +25,10 @@ module IntegrationApi
     attr_accessor :secret, :allowed_origins, :alg, :origin
 
     def initialize
-      @secret = 'secret'
-      @allowed_origins = []
+      @secret = nil
+      @oirign = nil
       @alg = 'HS256'
-      @oirign = 'origin'
+      @allowed_origins = []
     end
   end
 
@@ -162,5 +162,21 @@ module IntegrationApi
                token_data = nil)
     HTTParty.get(URI(url), headers:
                  add_auth_header(headers, sender, token_data))
+  end
+
+  #
+  # Send "DELETE" HTTP request with Auth headers attached
+  #
+  # @param [String] url
+  # @param [String] sender
+  # @param [Hash] headers
+  #
+  # @return [HTTParty response] response
+  #
+  def self.delete(url, sender = 'System',
+    headers = { 'Content-Type' => 'application/json' },
+    token_data = nil)
+    HTTParty.delete(URI(url),
+      headers: add_auth_header(headers, sender, token_data))
   end
 end

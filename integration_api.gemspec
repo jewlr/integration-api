@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.files       = ["lib/integration_api.rb"]
   spec.homepage    =
     'http://github.com/jewlr/integration-api'
-  spec.license       = 'MIT'
+  spec.license     = 'MIT'
 
   spec.required_ruby_version = '>= 2.1'
 
