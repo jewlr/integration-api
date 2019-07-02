@@ -1,5 +1,5 @@
 Gem::Specification.new do |spec|
-  spec.name        = 'IntegrationApi'
+  spec.name        = 'integration-api'
   spec.version     = '1.0.0'
   spec.date        = '2019-06-28'
   spec.summary     = "Easy short secret key based JWT communication between servers"
@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.email       = 'rem@jewlr.com'
   spec.files       = ["lib/integration_api.rb"]
   spec.homepage    =
-    'http://github.com/jewlr/integration-api'
+    'https://github.com/jewlr/integration-api.git'
   spec.license     = 'MIT'
 
   spec.required_ruby_version = '>= 2.1'
