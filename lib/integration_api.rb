@@ -2,11 +2,12 @@ require 'active_support/core_ext/hash/indifferent_access'
 require 'httparty'
 #
 # IntegrationApi module
-# Dedicated to allow easy communications between API services without using access tokens
+# Allows server to server communication using
+# JWT tokens with short TTL
 #
 module IntegrationApi
   # require 'jwt'
-  # require 'hashr'
+  # require 'indifferent_access'
   # require 'httparty'
 
   class << self

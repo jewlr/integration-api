@@ -8,5 +8,4 @@ IntegrationApi.configure do |config|
 
   # Allowed origin to respond
   config.allowed_origins = []
-
 end
