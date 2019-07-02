@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name        = 'integration_api'
-  spec.version     = '1.0.0'
+  spec.version     = '1.0.1'
   spec.date        = '2019-06-28'
   spec.summary     = "Easy short secret key based JWT communication between servers"
   spec.description = "JWT communication gem"

@@ -9,20 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- require to generator template
-
 ### Changed
 
 ### Deprecated
 
 ### Fixed
 
- - require 'integration_api' added to template
-
 ### Removed
 
 ### Security
 
+
+## [1.0.1 - 2019-07-02]
+
+### Added
+
+- require to generator template
+
+### Fixed
+
+ - require 'integration_api' added to template
 
 ## [1.0.0 - 2019-07-02]
 
