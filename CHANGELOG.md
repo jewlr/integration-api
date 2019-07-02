@@ -9,11 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- require to generator template
+
 ### Changed
 
 ### Deprecated
 
 ### Fixed
+
+ - require 'integration_api' added to template
 
 ### Removed
 

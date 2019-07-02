@@ -1,3 +1,4 @@
+require 'integration_api'
 
 IntegrationApi.configure do |config|
   # Secret key to decode tokens
