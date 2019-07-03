@@ -20,6 +20,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Security
 
 
+## [1.1.1 - 2019-07-03]
+
+### Added
+
+- Ability to send requests with custom secret key
+
 ## [1.0.1 - 2019-07-02]
 
 ### Added

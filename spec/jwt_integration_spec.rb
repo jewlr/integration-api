@@ -16,12 +16,12 @@ RSpec.describe IntegrationApi, type: :class do
     end
 
     it 'should generate a token' do
-      token = IntegrationApi.generate('System User')
+      token = IntegrationApi.generate(issuer: 'System User')
       expect(token).to be_a(String)
     end
 
     it 'should decode token' do
-      token = IntegrationApi.generate('System User', {foo: 'bar', bar: 'foo'})
+      token = IntegrationApi.generate(issuer: 'System User', data: {foo: 'bar', bar: 'foo'})
       decoded_payload = IntegrationApi.decode(token)
       expect(decoded_payload['iss']).to eq('System User')
       expect(decoded_payload['data']['foo']).to eq('bar')
@@ -29,13 +29,13 @@ RSpec.describe IntegrationApi, type: :class do
     end
 
     it 'should say that token is valid' do
-      token = IntegrationApi.generate('System User', {foo: 'bar', bar: 'foo'})
+      token = IntegrationApi.generate(issuer:'System User', data:{foo: 'bar', bar: 'foo'})
       is_valid = IntegrationApi.validate(token)
       expect(is_valid).to be_truthy
     end
 
     it 'should say that token is invalid because expired' do
-      token = IntegrationApi.generate('System User', {foo: 'bar', bar: 'foo'}, Time.now() - 4 * 3600)
+      token = IntegrationApi.generate(issuer:'System User', data:{foo: 'bar', bar: 'foo'}, exp: (Time.now() - 4 * 3600).to_i)
       is_valid = IntegrationApi.validate(token)
       expect(is_valid).to be_falsey
     end
@@ -101,6 +101,25 @@ RSpec.describe IntegrationApi, type: :class do
       stub_request(:delete, url).to_return(body: { data: 'DELETE request' }.to_json)
       response = IntegrationApi.delete(url)
       expect(JSON.parse(response.body)['data']).to eq('DELETE request')
+    end
+
+
+    it 'should generate token using custom secret key' do
+      custom_secret_key = 'some-custom-secret-key'
+      other_key = 'other_key'
+      token = IntegrationApi.generate(issuer: 'System User', data: {foo: 'bar', bar: 'foo'}, custom_secret_key: custom_secret_key)
+      invalid_decode = IntegrationApi.decode(token, custom_secret_key: other_key)
+      expect(invalid_decode).to be(nil)
+
+      valid_payload = IntegrationApi.decode(token, custom_secret_key: custom_secret_key)
+      expect(valid_payload['data']['foo']).to eq('bar')
+      expect(valid_payload['data']['bar']).to eq('foo')
+
+      is_invalid = IntegrationApi.validate(token, custom_secret_key: other_key)
+      expect(is_invalid).to be_falsey
+      is_valid = IntegrationApi.validate(token, custom_secret_key: custom_secret_key)
+      expect(is_valid).to be_truthy
+
     end
   end
 end
