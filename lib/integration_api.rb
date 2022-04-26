@@ -132,10 +132,19 @@ module IntegrationApi
                 headers: { 'Content-Type' => 'application/json' },
                 token_data: nil)
     response_data = data
+    partitioned_url = url.partition('/api').first
+    # we don't verify ssl for dev
+    verify_ssl = case partitioned_url
+                 when 'https://jewlr.safyre.dev'
+                   false
+                 else
+                   true
+                 end
     response_data = { data: data } if wrap_in_data
     HTTParty.post(URI(url),
                   body: response_data.to_json,
-                  headers: add_auth_header(headers, sender, token_data, custom_secret_key))
+                  headers: add_auth_header(headers, sender, token_data, custom_secret_key),
+                  verify: verify_ssl)
   end
 
   #
@@ -152,10 +161,19 @@ module IntegrationApi
                headers: { 'Content-Type' => 'application/json' },
                token_data: nil)
     response_data = data
+    partitioned_url = url.partition('/api').first
+    # we don't verify ssl for dev
+    verify_ssl = case partitioned_url
+                 when 'https://jewlr.safyre.dev'
+                   false
+                 else
+                   true
+                 end
     response_data = { data: data } if wrap_in_data
     HTTParty.put(URI(url),
     body: response_data.to_json,
-    headers: add_auth_header(headers, sender, token_data, custom_secret_key))
+    headers: add_auth_header(headers, sender, token_data, custom_secret_key),
+    verify: verify_ssl)
   end
 
   #
@@ -170,8 +188,17 @@ module IntegrationApi
   def self.get(url, custom_secret_key: nil, sender: 'System',
                headers: { 'Content-Type' => 'application/json' },
                token_data: nil)
+    # we don't verify ssl for dev
+    partitioned_url = url.partition('/api').first
+    verify_ssl = case partitioned_url
+                 when 'https://jewlr.safyre.dev'
+                   false
+                 else
+                   true
+                 end
     HTTParty.get(URI(url), headers:
-                 add_auth_header(headers, sender, token_data, custom_secret_key))
+                 add_auth_header(headers, sender, token_data, custom_secret_key),
+                           verify: verify_ssl)
   end
 
   #
@@ -186,7 +213,16 @@ module IntegrationApi
   def self.delete(url, custom_secret_key: nil, sender: 'System',
     headers: { 'Content-Type' => 'application/json' },
     token_data: nil)
+    # we don't verify ssl for dev
+    partitioned_url = url.partition('/api').first
+    verify_ssl = case partitioned_url
+                 when 'https://jewlr.safyre.dev'
+                   false
+                 else
+                   true
+                 end
     HTTParty.delete(URI(url),
-      headers: add_auth_header(headers, sender, token_data, custom_secret_key))
+      headers: add_auth_header(headers, sender, token_data, custom_secret_key),
+      verify: verify_ssl)
   end
 end
