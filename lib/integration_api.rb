@@ -128,15 +128,24 @@ module IntegrationApi
   #
   # @return [HTTParty response] response
   #
-  def self.post(url, data, wrap_in_data: true, custom_secret_key: nil, sender: 'System',
-                headers: { 'Content-Type' => 'application/json' },
-                token_data: nil, verify: true)
+  def self.post(
+    url:,
+    data:,
+    wrap_in_data: true,
+    custom_secret_key: nil,
+    sender: 'System',
+    headers: { 'Content-Type' => 'application/json' },
+    token_data: nil,
+    timeout: 60,
+    verify: true
+  )
     response_data = data
 
     response_data = { data: data } if wrap_in_data
     HTTParty.post(URI(url),
                   body: response_data.to_json,
                   headers: add_auth_header(headers, sender, token_data, custom_secret_key),
+                  timeout: timeout,
                   verify: verify)
   end
 
@@ -150,16 +159,27 @@ module IntegrationApi
   #
   # @return [HTTParty response] response
   #
-  def self.put(url, data, wrap_in_data:true, custom_secret_key: nil, sender: 'System',
-               headers: { 'Content-Type' => 'application/json' },
-               token_data: nil, verify: true)
+  def self.put(
+    url:,
+    data:,
+    wrap_in_data: true,
+    custom_secret_key: nil,
+    sender: 'System',
+    headers: { 'Content-Type' => 'application/json' },
+    timeout: 60,
+    token_data: nil,
+    verify: true
+  )
     response_data = data
 
     response_data = { data: data } if wrap_in_data
-    HTTParty.put(URI(url),
-    body: response_data.to_json,
-    headers: add_auth_header(headers, sender, token_data, custom_secret_key),
-    verify: verify)
+    HTTParty.put(
+      URI(url),
+      body: response_data.to_json,
+      headers: add_auth_header(headers, sender, token_data, custom_secret_key),
+      timeout: timeout,
+      verify: verify
+    )
   end
 
   #
@@ -171,13 +191,22 @@ module IntegrationApi
   #
   # @return [HTTParty response] response
   #
-  def self.get(url, custom_secret_key: nil, sender: 'System',
-               headers: { 'Content-Type' => 'application/json' },
-               token_data: nil, verify: true)
+  def self.get(
+    url,
+    custom_secret_key: nil,
+    sender: 'System',
+    headers: { 'Content-Type' => 'application/json' },
+    timeout: 60,
+    token_data: nil,
+    verify: true
+  )
 
-    HTTParty.get(URI(url), headers:
-                 add_auth_header(headers, sender, token_data, custom_secret_key),
-                           verify: verify)
+    HTTParty.get(
+      URI(url),
+      headers: add_auth_header(headers, sender, token_data, custom_secret_key),
+      timeout: timeout,
+      verify: verify,
+    )
   end
 
   #

@@ -19,6 +19,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+## [1.1.2 - 2024-12-28]
+
+### Added
+
+- Ability to specify HTTP Timeout
 
 ## [1.1.1 - 2019-07-03]
 
