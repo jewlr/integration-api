@@ -129,8 +129,8 @@ module IntegrationApi
   # @return [HTTParty response] response
   #
   def self.post(
-    url:,
-    data:,
+    url,
+    data,
     wrap_in_data: true,
     custom_secret_key: nil,
     sender: 'System',
@@ -160,8 +160,8 @@ module IntegrationApi
   # @return [HTTParty response] response
   #
   def self.put(
-    url:,
-    data:,
+    url,
+    data,
     wrap_in_data: true,
     custom_secret_key: nil,
     sender: 'System',
